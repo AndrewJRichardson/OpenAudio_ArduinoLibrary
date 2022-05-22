@@ -79,15 +79,16 @@ class AudioSynthWaveform_F32 : public AudioStream_F32
         _magnitude = n;
     }
 
-    void begin(short t_type) {
-        _Phase = 0;
+    void begin(short t_type, bool resetPhase) {
+      if(resetPhase)
+          _Phase = 0;
         oscillatorMode(t_type);
     }
 
-    void begin(float32_t t_amp, float32_t t_freq, short t_type) {
+    void begin(float32_t t_amp, float32_t t_freq, short t_type, bool resetPhase) {
         amplitude(t_amp);
         frequency(t_freq);
-        begin(t_type);
+        begin(t_type, resetPhase);
     }
 
     void pitchModAmount(float32_t amount) {
