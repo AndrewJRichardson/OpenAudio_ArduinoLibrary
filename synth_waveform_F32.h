@@ -115,6 +115,10 @@ class AudioSynthWaveform_F32 : public AudioStream_F32
       }
     }
 
+    OscillatorMode GetWaveType(){
+      return _OscillatorMode;
+    }
+
     void update(void);
 	void setSampleRate(const float32_t fs_Hz)
 	{
@@ -122,6 +126,15 @@ class AudioSynthWaveform_F32 : public AudioStream_F32
 		_PortamentoSamples = floorf( ((float)_PortamentoSamples) * fs_Hz / sample_rate_Hz );
 		sample_rate_Hz = fs_Hz;
 	}
+
+  void setPhase(const float32_t phase){
+    _Phase = phase;
+  }
+
+  float32_t getPhase(){
+    return _Phase;
+  }
+
   private:
     inline float32_t applyMod(uint32_t sample, audio_block_f32_t *lfo);
     const float32_t _PI;
